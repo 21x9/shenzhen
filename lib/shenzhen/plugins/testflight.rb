@@ -6,6 +6,8 @@ module Shenzhen::Plugins
   module TestFlight
     class Client
       HOSTNAME = 'testflightapp.com'
+      APITOKEN = 'furvD3wHreOsbNVWyW3OGfIqLNt8kxP1uEEmuFPeyDI'
+      TEAMTOKEN = '1c70ee77a743b1e82dc37546282a73ee_NzExNDIwMTEtMTEtMjIgMTQ6NDA6MDYuMzY3NDI2'
 
       def initialize(api_token, team_token)
         @api_token, @team_token = api_token, team_token
@@ -20,8 +22,8 @@ module Shenzhen::Plugins
 
       def upload_build(ipa, options)
         options.update({
-          :api_token => @api_token,
-          :team_token => @team_token,
+          :api_token => APITOKEN,
+          :team_token => TEAMTOKEN,
           :file => Faraday::UploadIO.new(ipa, 'application/octet-stream')
         })
 
@@ -87,11 +89,11 @@ command :'distribute:testflight' do |c|
   private
 
   def determine_api_token!
-    @api_token ||= ask "API Token:"
+    #@api_token ||= ask "API Token:"
   end
 
   def determine_team_token!
-    @team_token ||= ask "Team Token:"
+    #@team_token ||= ask "Team Token:"
   end
 
   def determine_file!
